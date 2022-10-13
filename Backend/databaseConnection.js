@@ -6,9 +6,9 @@ db.once('open',()=>{
       console.log("open")
 })
 
-const loginSchema=new mongoose.Schema({
-      name:String
-});
+// const loginSchema=new mongoose.Schema({
+//       name:String
+// });
 
 // var login=mongoose.model('login_db',loginSchema);
 

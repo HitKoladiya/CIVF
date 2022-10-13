@@ -1,18 +1,22 @@
-const mongoose = require("mongoose");
-const Form = require("./Schema/Accelerator_Program_Application_Form")
-const send=require("./send_otp_email")
+const Form = require("../Schema/Accelerator_Program_Application_Form")
+const send=require("../send_otp_email")
 
 
 function storedata(data){
     var message="You are Successfully Registered in CIVF"
-    var hit=new Form(data)
-    hit.save((err,data)=>{
-            console.log("err:",err);
-            // console.log(data);
-            if(err===null){
-                send.sendEmail(data['Email'],message);
-            }
-        });
+    try{
+        var hit=new Form(data)
+        hit.save((err,data)=>{
+                console.log("err:",err);
+                // console.log(data);
+                if(err===null){
+                    send.sendEmail(data['Email'],message);
+                }
+            });
+    }catch(e){
+        console.log(e)
+    }
+   
 }
 exports.storedata=storedata
 

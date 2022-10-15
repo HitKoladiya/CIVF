@@ -4,6 +4,8 @@ const app=Exp();
 const port=3000
 
 const storeForm=require("./Acceleration/AccelerationForm")
+app.use(require("./CRUD/Router"));
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

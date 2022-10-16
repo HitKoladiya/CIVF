@@ -8,7 +8,7 @@ router.use(bodyParser.json());
 
 
 //create object in database(Checked)
-router.post("/create", async (req, res) => {
+router.post("/news", async (req, res) => {
     try{
         var obj=new News(req.body);
     obj.save((err,data)=>{
@@ -26,72 +26,80 @@ router.post("/create", async (req, res) => {
 
 
 //find object from database(Checked)
-router.post("/read", async (req, res) => {
+router.get("/news", async (req, res) => {
     // console.log(req.body)
+    var userMap={};
     try{
-        id=req.body['_id'];
-        users=await News.findOne({_id:id}, function (err, docs) {
+        News.find({}, function (err, docs) {
             if (err){
                 res.send(err);
             }
-        })
-        // console.log(users)
-        if(users){
-            res.send(users)
+            docs.forEach(function(user) {
+                // console.log(docs._id)
+                userMap[user._id] = user;
+                });
+                console.log(userMap)
+                res.send(userMap)
+            })
+        }catch(err){
+            res.send(err)
         }
-        else{
-            res.send("not found")
-        }
-       
-    }catch(err){
-        res.send(err)
-    }
-})
+    })
 
 
 //update object
-router.post("/update", async (req, res) => {
+router.put("/news/:id", async (req, res) => {
     // console.log(req.body)
     try{
-        id=req.body['_id'];
-        users=await News.findOne({_id:id}, function (err, docs) {
-            if (err){
-                res.send(err);
-            }
-        })
-        // console.log(users)
-        if(users){
-            News.updateOne({_id:id}, 
-                {
+        id=req.params.id;
+        // users=await News.findOne({link:id}, function (err, docs) {
+        //     if (err){
+        //         res.send("Docs Not Found");
+        //     }
+        // })
+        // // console.log(users)
+        // if(users){
+            News.updateOne({link:id} 
+                ,{
                     "link": req.body['link'],
                     "title": req.body['title'],
                     "image": req.body['image'],
-                    "description": req.body['description']}, function (err, docs) {
-                if (err){
-                    console.log(err)
-                }
-                else{
-                    res.send("Document was Updated");
-                }
+                    "description": req.body['description']}
+                     
+                ,function (err, docs) {
+                    console.log("docs:",docs)
+                    console.log("err:",err)
+
+                    if (err){
+                        res.send(err)
+                    }
+                    else if(docs["modifiedCount"]==0){
+                        res.send("No Document Found For Update")
+                    }
+                    else{
+                        res.send("Document was Updated");
+                    }
             });
-        }
-        else{
-            res.send("not found")
-        }
-       
-    }catch(err){
-        res.send(err)
-    }
+        }catch(err){
+            res.send(err)
+            }
 })
 
 //for delete object(Checked)
-router.post("/delete", async (req, res) => {
+router.delete("/news/:id", async (req, res) => {
     // console.log(req.body)
     try{
-        id=req.body['_id'];
+        id=req.params.id;
     
-        News.deleteOne({_id:id}).then(function(){
-            res.send("Data deleted");
+        News.deleteOne({link:id}).then(function(err){
+            // console.log(err["deletedCount"])
+            if(err["deletedCount"]==0){
+                console.log("err:",err)
+                res.send("Please Enter Valid Docs")
+            }
+            else{
+                res.send("Sucessfully Data deleted");
+            }
         }).catch(function(error){
             res.send(error);
         });

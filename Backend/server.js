@@ -1,5 +1,9 @@
 const Exp=require("express");
+const path = require("path");
+const fs = require("fs");
 const bodyParser = require("body-parser");
+const upload=require("../Backend/ImageUpload")
+const Image=require("../Backend/Schema/imageSchema")
 const app=Exp();
 const port=3000
 
@@ -33,7 +37,33 @@ app.get("/allAccelerationForm",(req,res)=>{
 
 })
 
+///for getting image and store to databse and In the folder
+app.post("/upload",(req,res)=>{
+    upload(req,res,(err)=>{
+        if(err){
+            console.log(err)
+        }
+        else{
+            console.log(req.file.filename)
+            const newImage=new Image({
+                name: req.file.filename,
+                image:{
+                    data:req.file.filename,
+                    contentType:'image/png'
+                }
+            })
+            newImage.save()
+            .then(()=>res.send('successfully upload')).catch(err=>console.log(err))
+        }
+    })
+});
 
+  
+//sending one image from backend
+app.post("/image.jpeg", (req, res) => {
+    var name="WhatsApp Image 2022-10-08 at 13.21.21.jpeg"
+    res.sendFile(path.join(__dirname, `./ImageStore/${name}`));
+  });
 
 
 app.listen(port,()=>{

@@ -67,8 +67,8 @@ router.put("/news/:id", async (req, res) => {
                     "description": req.body['description']}
                      
                 ,function (err, docs) {
-                    console.log("docs:",docs)
-                    console.log("err:",err)
+                    // console.log("docs:",docs)
+                    // console.log("err:",err)
 
                     if (err){
                         res.send(err)
@@ -94,7 +94,7 @@ router.delete("/news/:id", async (req, res) => {
         News.deleteOne({link:id}).then(function(err){
             // console.log(err["deletedCount"])
             if(err["deletedCount"]==0){
-                console.log("err:",err)
+                // console.log("err:",err)
                 res.send("Please Enter Valid Docs")
             }
             else{

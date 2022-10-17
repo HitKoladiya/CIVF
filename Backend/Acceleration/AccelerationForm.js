@@ -1,5 +1,5 @@
 const Form = require("../Schema/Accelerator_Program_Application_Form")
-const send=require("../send_otp_email");
+const send=require("../send_email");
 
 
 function storedata(data){

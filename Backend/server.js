@@ -12,7 +12,7 @@ const authenticate = require("./authenticate");
 const User = require("./Schema/userSchema")
 
 const app = Exp();
-const port = 3000
+const port = 5000
 
 
 app.use(require("./CRUD/Router"));

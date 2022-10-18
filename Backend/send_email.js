@@ -53,5 +53,5 @@ function sendEmail(email,data){
     });
 }
 
-sendEmail("hitkoladiya3@gmail.com,jaykeraliya0@gmail.com","hii jay")
-// exports.sendEmail=sendEmail;
+// sendEmail("hitkoladiya3@gmail.com,jaykeraliya0@gmail.com","hii jay")
+exports.sendEmail=sendEmail;

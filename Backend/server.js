@@ -7,6 +7,9 @@ const Image=require("../Backend/Schema/imageSchema")
 const app=Exp();
 const port=3000
 
+const Form = require("./Schema/Accelerator_Program_Application_Form")
+const send=require("./send_email");
+
 const storeForm=require("./Acceleration/AccelerationForm")
 app.use(require("./CRUD/Router"));
 
@@ -25,10 +28,36 @@ app.post("/database",(req,res)=>{
     console.log("data:",req.body);
 })
 
-app.post("/applyforacceleration",(req,res)=>{
+app.post("/applyforacceleration",async(req,res)=>{
     // console.log(req.body)
-    res.send(`hello world`);
-    storeForm.storedata(req.body);
+    // res.send(`HELLO WORLD`);
+    const data=req.body;
+    console.log(req.body);
+    var message="You are Successfully Registered in CIVF"
+    var responce="";
+    try{
+        var hit=new Form(data);
+        hit.save((err,data)=>{
+                console.log("err:",err);
+                // console.log(data);
+                if(err==null){
+                
+                    send.sendEmail(data['Email'],message);
+                    responce="Succesfully Stored"
+                    res.send(responce);
+                }
+                else{
+                    responce="Something went wrong";
+                    res.send(responce);
+                }
+            });
+    }catch(e){
+        console.log(e)
+        responce="Something went wrong";
+        res.send(responce);
+    }
+
+    
 })
 
 app.get("/allAccelerationForm",(req,res)=>{

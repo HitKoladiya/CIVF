@@ -1,29 +1,40 @@
+// require("mongoose")
 const Form = require("../Schema/Accelerator_Program_Application_Form")
 const send=require("../send_email");
 
 
 function storedata(data){
     var message="You are Successfully Registered in CIVF"
+    var responce="";
     try{
-        let hit=data;
-        Form.insertOne(hit);
+        var hit=new Form(data);
         hit.save((err,data)=>{
                 console.log("err:",err);
                 // console.log(data);
-                if(err===null){
+                if(err==null){
+                
                     send.sendEmail(data['Email'],message);
+                    responce="Succesfully Stored"
+                    return "Succesfully Stored";
+                }
+                else{
+                    responce="Something went wrong";
+                     return "Something went wrong";
                 }
             });
     }catch(e){
         console.log(e)
+        responce="Something went wrong";
+        return "Something went wrong";
     }
    
 }
 
-exports.storedata=storedata
+
+// exports.storedata=storedata
 
 // var hit = new Form({
-//     Email: "hitkoladiya",
+//     Email: "jaykeraliya0@gmail.com",
 //     Acknowledgement: true,
 //     Name_of_Startup: "comp",
 //     Company_URL: "na",
@@ -34,3 +45,4 @@ exports.storedata=storedata
 //     country: "india",
 //     city: "surat"
 // })
+// console.log(storedata(hit))

@@ -24,18 +24,8 @@ function sendEmail(email,data){
             <title>Document</title>
         </head>
         <body>
-            <div>hii i am hit</div>
-            <br>
-            <form>
-                
-                <div>Username : jay</div>
-                
-                
-                <div>Email id : jaykeraliya0@gmail.com</div>
-                <br><br>
-            </form>
-            <br>
-            <br>
+        <br>
+        <br>
             <div>Thanks For Registration</div>
  
 </body>
@@ -46,12 +36,14 @@ function sendEmail(email,data){
 
     mailTransporter.sendMail(mailDetails, function(err, data) {
         if(err) {
-            console.log('Err:',err);
+            console.log("No recipients defined");
+            return "No recipients defined"
         } else {
             console.log('Email sent successfully');
+            return 'Email sent successfully'
         }
     });
 }
 
-// sendEmail("hitkoladiya3@gmail.com,jaykeraliya0@gmail.com","hii jay")
+// console.log(sendEmail("hitkoladiya3@gmail.com,jaykeraliya0@gmail.com","hii jay"))
 exports.sendEmail=sendEmail;

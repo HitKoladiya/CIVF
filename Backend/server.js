@@ -65,14 +65,14 @@ app.post("/applyforacceleration", async (req, res) => {
 })
 
 app.get("/allAccelerationForm", (req, res) => {
-    var userMap = {};
+    var userMap = [];
     Form.find({}, function (err, docs) {
         if (err) {
             res.send(err);
         }
         docs.forEach(function (user) {
             console.log(user)
-            userMap[user._id] = user;
+            userMap.push(user);
         });
         console.log(userMap)
         res.send(userMap)

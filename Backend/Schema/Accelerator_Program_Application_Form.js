@@ -1,16 +1,28 @@
 require("../databaseConnection")
 const mongoose = require("mongoose")
 const AccelerationFormSchema = new mongoose.Schema({
-    Email: String,
-    Acknowledgement: Boolean,
-    Name_of_Startup: String,
-    Company_URL: String,
-    Name_of_products: String,
-    describe_about_your_products: String,
-    Number_of_employees: String,
-    link_to_the_CEO: String,
+    email: String,
+    startup: String,
+    URL: String,
+    NameOfProducts: String,
+    productDescription: String,
+    employees: String,
+    profile: String,
     country: String,
-    city: String
+    city: String,
+    preliminaryScreening:{
+        type:Boolean,
+        default:false,
+    },
+    finalPitch:{
+        type:Boolean,
+        default:false,
+    },
+    RequirementsIncubationAgreement:{
+        type:Boolean,
+        default:false,
+    },
+
 });
 
 const Form = mongoose.model("AccelerationForm", AccelerationFormSchema);
@@ -18,14 +30,13 @@ const Form = mongoose.model("AccelerationForm", AccelerationFormSchema);
 module.exports = Form;
 
 // var test={
-//     Email: "hitkoladiya",
-//     Acknowledgement: true,
-//     Name_of_Startup: "comp",
-//     Company_URL: "na",
-//     Name_of_products: "hi",
-//     describe_about_your_products: "must",
-//     Number_of_employees: 10,
-//     link_to_the_CEO: "na",
-//     country: "india",
-//     city: "surat"
+//     "email": "21it064@charusat.edu.in",
+//     "startup": "hit 1234",
+//     "URL": "https://hitlo.mc",
+//     "NameOfProducts": "dada no lengho",
+//     "employees": "51-100",
+//     "profile": "https://hit.ceo.bc",
+//     "country": "africa",
+//     "city": "jungle",
+//     "productDescription": "3 paisa vaalo dada no lengo 🤔🤔"
 // }

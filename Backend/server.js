@@ -42,9 +42,9 @@ app.post("/applyforacceleration",async(req,res)=>{
                 // console.log(data);
                 if(err==null){
                 
-                    send.sendEmail(data['Email'],message);
+                    send.sendEmail(data['email'],message);
                     responce="Succesfully Stored"
-                    res.send(responce);
+                    res.send(data);
                 }
                 else{
                     responce="Something went wrong";

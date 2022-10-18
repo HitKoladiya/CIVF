@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
-const User = require("userSchema");
+const User = require("./Schema/userSchema");
 
 const Authenticate = async (req, res, next) => {
   try {
     const token = req.cookies.jwtoken;
 
-    const verifyToken = jwt.verify(token, process.env.TOKENKEY);
+    const verifyToken = jwt.verify(token,"HITANDJATSTUDTATCHARUSATUNIVERCITYININFORMATIONTECHNOLOGY");
 
     const rootUser = await User.findOne({
       _id: verifyToken._id,

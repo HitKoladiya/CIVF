@@ -25,7 +25,7 @@ router.post("/news", async (req, res) => {
 })
 
 
-//find object from database(Checked)
+//all object  of news from database(Checked)
 router.get("/news", async (req, res) => {
     // console.log(req.body)
     var userMap={};

@@ -6,8 +6,8 @@ function sendEmail(email,data){
     let mailTransporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: '21it067@charusat.edu.in',
-            pass: 'iamhitpatel'
+            user: 'mail',
+            pass: 'password'
         }
     });
 

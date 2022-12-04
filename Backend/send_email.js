@@ -2,17 +2,17 @@ const nodemailer = require('nodemailer');
 
 
 
-function sendEmail(email,data){
+async function sendEmail(email,data){
     let mailTransporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'mail',
-            pass: 'password'
+            user: '22ehe009@charusat.edu.in',
+            pass: 'Hit_Lo_123456'
         }
     });
 
     let mailDetails = {
-        from: '21it067@charusat.edu.in',
+        from: '22ehe009@charusat.edu.in',
         to: email,
         subject: 'CIVF charusat',
         html:`<!DOCTYPE html>
@@ -34,7 +34,7 @@ function sendEmail(email,data){
         </html>`
     };
 
-    mailTransporter.sendMail(mailDetails, function(err, data) {
+    await mailTransporter.sendMail(mailDetails,function(err, data) {
         if(err) {
             console.log("No recipients defined");
             return "No recipients defined"

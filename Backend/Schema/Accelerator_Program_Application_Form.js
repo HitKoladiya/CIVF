@@ -22,6 +22,9 @@ const AccelerationFormSchema = new mongoose.Schema({
         type:Boolean,
         default:false,
     },
+    Application_number:{
+        type:Number,
+    }
 
 });
 

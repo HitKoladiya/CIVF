@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-mongoose.connect("mongodb url");
+mongoose.connect("mongodb+srv://hitkoladiya:CIVF@cluster0.wzsvd5c.mongodb.net/test");
 const db=mongoose.connection;
 db.on('error',console.error.bind(console,'hii'));
 db.once('open',()=>{
